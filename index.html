@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.6 & 1.7 JS 事件觸發與安全表單驗證</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f6f9; padding: 30px; }
+        .form-card { max-width: 450px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; color: #333; }
+        input[type="text"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 16px; }
+        
+        /* 互動按鈕樣式 */
+        .btn-submit { width: 100%; padding: 12px; background-color: #0056b3; color: white; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+        .btn-submit:hover { background-color: #004085; }
+
+        /* 動態輸出訊息區域 */
+        .output-message { margin-top: 25px; padding: 15px; border-radius: 4px; font-weight: bold; display: none; }
+        .error-style { display: block; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .success-style { display: block; background-color: #d1e7dd; color: #0f5132; border: 1px solid #badbcc; }
+    </style>
+</head>
+<body>
+
+    <div class="form-card">
+        <h2 style="margin-top:0; color:#0056b3;">青年學院入學系統</h2>
+        <p style="font-size:14px; color:#666;">本介面採用現代 JS 事件監聽器與防禦性規則表達式驗證技術。</p>
+
+        <!-- 表單結構 -->
+        <form id="admissionForm">
+            <div class="form-group">
+                <label for="studentName">學員姓名 (全名):</label>
+                <input type="text" id="studentName" placeholder="例如：陳大文" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+                <label for="studentEmail">電子郵件 (Email):</label>
+                <input type="text" id="studentEmail" placeholder="example@vtc.edu.hk" autocomplete="off">
+            </div>
+
+            <button type="submit" id="submitBtn" class="btn-submit">提交入學申請</button>
+        </form>
+
+        <!-- 3. 現代標準：預留一個完全乾淨的區塊，專門給 JavaScript 做動態非同步輸出 -->
+        <div id="outputBox" class="output-message"></div>
+    </div>
+
+    <!-- JavaScript 邏輯層 (完美落實結構與邏輯分離) -->
+    <script>
+        // A. 抓取網頁核心 DOM 元件
+        const formElement = document.getElementById('admissionForm');
+        const nameInput = document.getElementById('studentName');
+        const emailInput = document.getElementById('studentEmail');
+        const outputBox = document.getElementById('outputBox');
+
+        // B. 【1.6章核心】：綁定現代事件監聽器，攔截表單預設的頁面刷新行為
+        formElement.addEventListener('submit', function(event) {
+            event.preventDefault(); // 核心防禦：強行阻止網頁刷新，保留使用者輸入的資料
+
+            // C. 【1.7章核心】：獲取用戶輸入並使用 .trim() 移除前後惡意或誤觸的空白鍵
+            const inputName = nameInput.value.trim();
+            const inputEmail = emailInput.value.trim();
+
+            // D. 合法性檢查 (Validity Check)：設定標準的 Email 正則表達式規則
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // 檢查一：姓名是否留空
+            if (inputName === "") {
+                showOutput("❌ 驗證失敗：學員姓名欄位不可留空！", "error-style");
+                return; // 攔截中斷，不再往下執行
+            }
+
+            // 檢查二：Email 格式是否正確
+            if (!emailRegex.test(inputEmail)) {
+                showOutput("❌ 驗證失敗：請輸入正確的電子郵件格式！", "error-style");
+                return; // 攔截中斷
+            }
+
+            // E. 安全動態輸出 (Output)：通過所有檢查後，動態生成客製化歡迎詞
+            showOutput(`🎉 驗證成功！恭喜同學 【${inputName}】 已通過初步審查，錄取信件已發送至 ${inputEmail}！`, "success-style");
+        });
+
+        // 輔助函數：負責安全渲染 UI 畫面
+        function showOutput(message, className) {
+            outputBox.className = "output-message " + className; // 切換樣式
+            
+            // 黃金安全防護：使用 textContent 將字串安全純文字化，免疫 XSS 攻擊
+            outputBox.textContent = message; 
+        }
+    </script>
+</body>
+</html>
