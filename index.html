@@ -1,93 +1,61 @@
 <!DOCTYPE html>
-<html lang="zh-Hant-HK">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1.6 & 1.7 JS 事件觸發與安全表單驗證</title>
-    <style>
-        body { font-family: sans-serif; background-color: #f4f6f9; padding: 30px; }
-        .form-card { max-width: 450px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; font-weight: bold; margin-bottom: 8px; color: #333; }
-        input[type="text"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 16px; }
-        
-        /* 互動按鈕樣式 */
-        .btn-submit { width: 100%; padding: 12px; background-color: #0056b3; color: white; border: none; border-radius: 4px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
-        .btn-submit:hover { background-color: #004085; }
-
-        /* 動態輸出訊息區域 */
-        .output-message { margin-top: 25px; padding: 15px; border-radius: 4px; font-weight: bold; display: none; }
-        .error-style { display: block; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-        .success-style { display: block; background-color: #d1e7dd; color: #0f5132; border: 1px solid #badbcc; }
-    </style>
+    <title>風采黑歷史|嘻嘻</title>
+    <!-- 🧙‍♂️ 注入現代網頁外掛，免寫幾百行 CSS -->
+    <script src="https://tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-950 text-gray-200 min-h-screen flex items-center justify-center p-4 antialiased selection:bg-red-500 selection:text-white">
 
-    <div class="form-card">
-        <h2 style="margin-top:0; color:#0056b3;">青年學院入學系統</h2>
-        <p style="font-size:14px; color:#666;">本介面採用現代 JS 事件監聽器與防禦性規則表達式驗證技術。</p>
+    <!-- 📜 中央主卡片：打造歷史檔案館的厚重質感 -->
+    <main class="max-w-2xl w-full bg-gray-900 border border-red-900/40 rounded-2xl p-6 sm:p-8 shadow-2xl shadow-red-950/20 backdrop-blur-sm">
+        
+        <!-- 🔺 標題：加上紅色警示與動態下底線 -->
+        <h1 class="text-3xl sm:text-4xl font-black text-red-500 tracking-wider mb-6 pb-4 border-b border-gray-800 flex items-center gap-2">
+            🚨 風采黑歷史
+        </h1>
+        
+        <!-- 💬 諷刺金句區：用區塊包起來，像名言佳句 -->
+        <blockquote class="bg-gray-950 border-l-4 border-yellow-500 p-4 rounded-r-lg mb-8 italic text-gray-400 text-sm leading-relaxed">
+            風采：校規最不嚴的學校 belike<br>
+            &emsp;&emsp;&emsp;最早能自己出去吃飯的學校 belike<br>
+            &emsp;&emsp;&emsp;最不喜歡查手機的學校 belike
+        </blockquote>
 
-        <!-- 表單結構 -->
-        <form id="admissionForm">
-            <div class="form-group">
-                <label for="studentName">學員姓名 (全名):</label>
-                <input type="text" id="studentName" placeholder="例如：陳大文" autocomplete="off">
-            </div>
+        <!-- 📖 第一通訊：古風敘事文 -->
+        <article class="space-y-4 text-base leading-relaxed tracking-wide mb-8">
+            <div class="text-xs font-bold uppercase tracking-widest text-red-400/70 mb-1">【 歷史文獻 】</div>
+            <div class="text-yellow-500 font-semibold">To: 後世人們</div>
+            <p class="text-gray-300">
+                公元2025年10月15日上午第二個小息，人潮洶湧，四樓歡樂之地，乃歡樂時光也。初，人無憂無慮。足音跫然，三乙班見訓導兩位踏進課室，一堆人名隨即被叫上，同學熙熙攘攘，紛紛走過來看怎麽回事，結果最後查出一堆手機，甚至幾包oreo.
+            </p>
+            <p class="text-gray-300">
+                屠殺還未完結，訓導走到三丙班，衆人藏諸名山，藏在垃圾桶的也有，最後屠殺死傷慘重，樹木凋零。其中一位同學憶述，「他居然説我和XXX談戀愛」，根本寡廉鮮恥，是恬不知恥。明天，後天，乃至整個星期，請小心。大家銘記歷史，切勿重蹈覆轍。
+            </p>
+            <div class="text-right text-sm font-medium text-gray-500 mt-2">— From: 史官</div>
+        </article>
 
-            <div class="form-group">
-                <label for="studentEmail">電子郵件 (Email):</label>
-                <input type="text" id="studentEmail" placeholder="example@vtc.edu.hk" autocomplete="off">
-            </div>
+        <hr class="border-gray-800 my-6">
 
-            <button type="submit" id="submitBtn" class="btn-submit">提交入學申請</button>
-        </form>
+        <!-- 📢 第二通訊：現代白話慘況 -->
+        <article class="space-y-4 text-base leading-relaxed tracking-wide">
+            <div class="text-xs font-bold uppercase tracking-widest text-red-400/70 mb-1">【 現狀更新 】</div>
+            <p class="text-gray-300">
+                風采 form3 的學生本來過著無憂無慮的生活，直到 2025 年 10 月 15 日上午 11 點 40 分的時候，邪惡的訓導組出現了，我們當中出現了叛徒，它們四處燒殺搶掠，現在風采生靈塗炭，16 日時，甚至有更多人受到了傷害。
+            </p>
+            <p class="text-gray-300">
+                這兩天下來，我們不僅失去了糧食（別提奧利奧了），更有人遭到了誣陷，説是跟 XXX 談戀愛，現在我們過著飢寒交迫的日子，在風采如同蹲監獄，不知道明天的嘨猿牲貨能不能是平安的一天，希望風采的大家都能夠活過這場風波...
+            </p>
+        </article>
 
-        <!-- 3. 現代標準：預留一個完全乾淨的區塊，專門給 JavaScript 做動態非同步輸出 -->
-        <div id="outputBox" class="output-message"></div>
-    </div>
+        <!-- ⏳ 底部未完待續 -->
+        <footer class="mt-8 pt-4 border-t border-gray-800 text-center text-sm text-gray-500 animate-pulse">
+            其他的懶得打了 等更新吧... 🍿
+        </footer>
 
-    <!-- JavaScript 邏輯層 (完美落實結構與邏輯分離) -->
-    <script>
-        // A. 抓取網頁核心 DOM 元件
-        const formElement = document.getElementById('admissionForm');
-        const nameInput = document.getElementById('studentName');
-        const emailInput = document.getElementById('studentEmail');
-        const outputBox = document.getElementById('outputBox');
+    </main>
 
-        // B. 【1.6章核心】：綁定現代事件監聽器，攔截表單預設的頁面刷新行為
-        formElement.addEventListener('submit', function(event) {
-            event.preventDefault(); // 核心防禦：強行阻止網頁刷新，保留使用者輸入的資料
-
-            // C. 【1.7章核心】：獲取用戶輸入並使用 .trim() 移除前後惡意或誤觸的空白鍵
-            const inputName = nameInput.value.trim();
-            const inputEmail = emailInput.value.trim();
-
-            // D. 合法性檢查 (Validity Check)：設定標準的 Email 正則表達式規則
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-            // 檢查一：姓名是否留空
-            if (inputName === "") {
-                showOutput("❌ 驗證失敗：學員姓名欄位不可留空！", "error-style");
-                return; // 攔截中斷，不再往下執行
-            }
-
-            // 檢查二：Email 格式是否正確
-            if (!emailRegex.test(inputEmail)) {
-                showOutput("❌ 驗證失敗：請輸入正確的電子郵件格式！", "error-style");
-                return; // 攔截中斷
-            }
-
-            // E. 安全動態輸出 (Output)：通過所有檢查後，動態生成客製化歡迎詞
-            showOutput(`🎉 驗證成功！恭喜同學 【${inputName}】 已通過初步審查，錄取信件已發送至 ${inputEmail}！`, "success-style");
-        });
-
-        // 輔助函數：負責安全渲染 UI 畫面
-        function showOutput(message, className) {
-            outputBox.className = "output-message " + className; // 切換樣式
-            
-            // 黃金安全防護：使用 textContent 將字串安全純文字化，免疫 XSS 攻擊
-            outputBox.textContent = message; 
-        }
-    </script>
 </body>
 </html>
